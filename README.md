@@ -2,6 +2,7 @@
 - [ ] Add metronome.
 - [ ] Customize range slider.
 - [ ] Make design more responsive.
+  - [ ] Responsive button size in settings-roots.
 - [ ] Add superscript to chord displays.
 
 ## Available Scripts

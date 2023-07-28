@@ -2,7 +2,7 @@ export default function BottomSheet({ open, onClose, children }) {
   return (
     <div>
       <div
-        class={`fixed h-screen w-screen top-0 left-0 transition-all duration-150 ${
+        class={`fixed h-[100dvh] w-screen top-0 left-0 transition-all duration-150 ${
           open ? "visible opacity-100" : "invisible opacity-0"
         } backdrop-brightness-30`}
         onClick={onClose}
