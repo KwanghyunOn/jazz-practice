@@ -87,7 +87,7 @@ const CHORD_TYPES = [
   {
     name: "halfdim7",
     isActive: true,
-    display: "m7♭5",
+    display: "Ø",
     label: "Half-diminished (m7♭5, ø)",
     class: "seventh",
   },
