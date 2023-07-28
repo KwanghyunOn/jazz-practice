@@ -1,5 +1,5 @@
 import { useState, useEffect, useRef } from "react";
-import { experimental_useEffectEvent as useEffectEvent } from "react";
+// import { experimental_useEffectEvent as useEffectEvent } from "react";
 import RandomChordPracticeSettings from "./RandomChordPracticeSettings";
 import BottomSheet from "./BottomSheet";
 
@@ -166,9 +166,12 @@ export default function RandomChordPractice() {
     );
   }
   const [chords, setChords] = useState([getRandomChord(), getRandomChord()]);
-  const updateChords = useEffectEvent(() => {
+  // const updateChords = useEffectEvent(() => {
+  //   setChords((chords) => [...chords.slice(1), getRandomChord()]);
+  // });
+  const updateChords = () => {
     setChords((chords) => [...chords.slice(1), getRandomChord()]);
-  });
+  };
 
   useEffect(() => {
     if (isPlaying) {
