@@ -169,11 +169,11 @@ export default function RandomChordPractice() {
   // const updateChords = useEffectEvent(() => {
   //   setChords((chords) => [...chords.slice(1), getRandomChord()]);
   // });
-  const updateChords = () => {
-    setChords((chords) => [...chords.slice(1), getRandomChord()]);
-  };
 
   useEffect(() => {
+    const updateChords = () => {
+      setChords((chords) => [...chords.slice(1), getRandomChord()]);
+    };
     if (isPlaying) {
       const intervalId = setInterval(() => {
         updateChords();
