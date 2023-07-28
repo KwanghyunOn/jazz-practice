@@ -3,6 +3,7 @@
 - [ ] Customize range slider.
 - [ ] Make design more responsive.
   - [ ] Responsive button size in settings-roots.
+  - [ ] Add more breakpoints.
 - [ ] Add superscript to chord displays.
 
 ## Available Scripts
