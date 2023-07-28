@@ -187,8 +187,8 @@ export default function RandomChordPractice() {
       <div class="basis-3/12 flex justify-center items-center">
         <p class="p-8 text-8xl md:text-9xl xl:text-10xl">{chords[0]}</p>
       </div>
-      <div class="basis-1/12 flex justify-center items-center">
-        <p class="text-4xl md:text-5xl">Up Next...</p>
+      <div class="basis-1/12 pb-2 flex justify-center items-center">
+        <p class="text-3xl md:text-4xl xl:text-5xl">Up Next...</p>
       </div>
       <div class="basis-1/12 flex justify-center items-center">
         <p class="text-6xl md:text-7xl xl:text-8xl">{chords[1]}</p>
