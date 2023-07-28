@@ -1,6 +1,8 @@
-# Getting Started with Create React App
-
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+## Todos
+- [ ] Add metronome.
+- [ ] Customize range slider.
+- [ ] Make design more responsive.
+- [ ] Add superscript to chord displays.
 
 ## Available Scripts
 
