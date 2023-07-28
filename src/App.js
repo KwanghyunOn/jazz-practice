@@ -1,25 +1,16 @@
-import logo from './logo.svg';
-import './App.css';
+import Navbar from "./components/Navbar";
+import RandomChordPractice from "./components/RandomChordPractice";
 
 function App() {
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+    <div class="flex flex-col h-screen">
+      <div class="grow-0 shrink-1 basis-auto">
+        <Navbar />
+      </div>
+      <div class="grow-1 shrink-1 basis-auto h-full bg-neutral-100">
+        <RandomChordPractice />
+      </div>
     </div>
   );
 }
-
 export default App;
