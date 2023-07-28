@@ -1,4 +1,4 @@
-import { useState, useEffect, useRef } from "react";
+import { useState, useEffect, useRef, useCallback } from "react";
 // import { experimental_useEffectEvent as useEffectEvent } from "react";
 import RandomChordPracticeSettings from "./RandomChordPracticeSettings";
 import BottomSheet from "./BottomSheet";
@@ -151,7 +151,7 @@ export default function RandomChordPractice() {
     setIsPlaying(wasPlayingRef.current);
   };
 
-  function getRandomChord() {
+  const getRandomChord = useCallback(() => {
     return (
       getRandomElement(
         roots.filter((root) => root.isActive).map((root) => root.display),
@@ -164,12 +164,12 @@ export default function RandomChordPractice() {
         ""
       )
     );
-  }
+  }, [roots, chordTypes]);
   const [chords, setChords] = useState([getRandomChord(), getRandomChord()]);
+
   // const updateChords = useEffectEvent(() => {
   //   setChords((chords) => [...chords.slice(1), getRandomChord()]);
   // });
-
   useEffect(() => {
     const updateChords = () => {
       setChords((chords) => [...chords.slice(1), getRandomChord()]);
@@ -180,7 +180,7 @@ export default function RandomChordPractice() {
       }, delay);
       return () => clearInterval(intervalId);
     }
-  }, [isPlaying, delay]);
+  }, [isPlaying, delay, getRandomChord]);
 
   return (
     <div class="h-full px-6 flex flex-col justify-center items-center">
