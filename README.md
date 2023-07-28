@@ -1,4 +1,6 @@
 ## Todos
+### Dev
+  - [ ] Migrate to Typescript.
 ### Features
   - [ ] Add diatonic chord practice.
   - [ ] Add metronome.
