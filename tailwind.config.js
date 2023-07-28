@@ -9,6 +9,9 @@ module.exports = {
       backdropBrightness: {
         30: ".30",
       },
+      maxHeight: {
+        "3/4": "75%",
+      },
     },
   },
   plugins: [],

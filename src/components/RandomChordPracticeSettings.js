@@ -17,7 +17,7 @@ function TempoSlider({ bpm, setBpm }) {
     <>
       <div class="flex flex-row justify-between items-center">
         <p class="text-xl font-semibold">Tempo</p>
-        <p class="text-xl">{sliderValue}</p>
+        <p class="text-xl">{sliderValue} bpm</p>
       </div>
       <input
         type="range"
@@ -36,33 +36,35 @@ function RootSettings({ roots, setRoots }) {
   return (
     <div>
       <p class="pb-2 text-xl font-semibold">Roots</p>
-      {roots.map((root) => (
-        <button
-          class={`w-16 px-2 py-2 m-0.5 text-lg font-semibold rounded-md 
+      <div>
+        {roots.map((root) => (
+          <button
+            class={`w-16 px-2 py-2 m-0.5 text-lg font-semibold rounded-md 
             ${
               root.isActive
                 ? "text-slate-100 bg-indigo-400 hover:bg-indigo-600"
                 : "text-slate-50 bg-indigo-200 hover:bg-indigo-500"
             }`}
-          onClick={(e) => {
-            setRoots(
-              roots.map((root) => {
-                if (root.name === e.target.name) {
-                  return {
-                    ...root,
-                    isActive: !root.isActive,
-                  };
-                } else {
-                  return root;
-                }
-              })
-            );
-          }}
-          name={root.name}
-        >
-          {root.label}
-        </button>
-      ))}
+            onClick={(e) => {
+              setRoots(
+                roots.map((root) => {
+                  if (root.name === e.target.name) {
+                    return {
+                      ...root,
+                      isActive: !root.isActive,
+                    };
+                  } else {
+                    return root;
+                  }
+                })
+              );
+            }}
+            name={root.name}
+          >
+            {root.label}
+          </button>
+        ))}
+      </div>
     </div>
   );
 }
