@@ -1,7 +1,7 @@
 import { useState } from "react";
 
 function TempoSlider({ bpm, setBpm }) {
-  const minBpm = 60;
+  const minBpm = 30;
   const maxBpm = 200;
   const [sliderValue, setSliderValue] = useState(bpm);
 
