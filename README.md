@@ -1,4 +1,6 @@
 ## Todos
+### Bugs
+  - [ ] Make background unscrollable when bottomsheet is activated.
 ### Dev
   - [ ] Migrate to Typescript.
 ### Features
