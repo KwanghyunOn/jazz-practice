@@ -1,11 +1,12 @@
 ## Todos
 ### Bugs
-  - [ ] Make background unscrollable when bottomsheet is activated.
+  - [ ] Disable background scrolling when bottomsheet is active.
 ### Dev
   - [ ] Migrate to Typescript.
 ### Features
   - [ ] Add diatonic chord practice.
   - [ ] Add metronome.
+  - [ ] Add interval quiz.
 ### Styling
   - [ ] Enlarge checkbox label sizes for mobile.
   - [ ] Customize range slider.
@@ -13,6 +14,8 @@
     - [ ] Responsive button size in settings-roots.
     - [ ] Add more breakpoints.
   - [ ] Add superscript to chord displays.
+### Misc
+  - [ ] Update favicon image.
 
 ## Available Scripts
 
