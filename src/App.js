@@ -7,7 +7,7 @@ function App() {
       <div class="grow-0 shrink-1 basis-auto">
         <Navbar />
       </div>
-      <div class="grow-1 shrink-1 basis-auto h-full bg-neutral-100">
+      <div class="grow-1 shrink-1 basis-auto h-full bg-neutral-100 overscroll-contain">
         <RandomChordPractice />
       </div>
     </div>
