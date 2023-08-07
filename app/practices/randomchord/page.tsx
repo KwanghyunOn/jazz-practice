@@ -1,6 +1,6 @@
 "use client"
 
-import { useState, useRef, useEffect, useCallback } from "react"
+import { useState, useEffect, useCallback } from "react"
 import Link from "next/link"
 import { AnimatePresence } from "framer-motion"
 import Settings from "./Settings"
@@ -59,7 +59,7 @@ export default function RandomChordPractice({
   }, [isPlaying, settingsOpen, delay, getRandomChord])
 
   return (
-    <div className="h-full py-12 flex flex-col justify-evenly items-center">
+    <div className="h-full pt-12 pb-4 flex flex-col justify-evenly items-center">
       <div className="grow-[2] flex justify-center items-center">
         <ChordDisplay
           chord={chords[0]}
@@ -75,7 +75,7 @@ export default function RandomChordPractice({
           className="text-6xl md:text-7xl xl:text-8xl"
         />
       </div>
-      <div className="grow-[1] flex justify-center items-center">
+      <div className="grow-[2] flex justify-center items-center">
         <PlayButton
           isPlaying={isPlaying}
           onClick={(e) => {
@@ -83,7 +83,7 @@ export default function RandomChordPractice({
           }}
         />
       </div>
-      <div className="w-full grow-[1] flex justify-center items-center">
+      <div className="grow-[1.5] w-full flex justify-center items-center">
         <Link
           href="?settings=true"
           className="w-2/3 max-w-xs md:max-w-sm p-4 btn-primary text-white text-xl md:text-2xl font-semibold rounded-full text-center select-none"
