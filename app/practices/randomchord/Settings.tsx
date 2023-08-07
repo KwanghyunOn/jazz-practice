@@ -221,7 +221,7 @@ export default function RandomChordPracticeSettings({
   chordTypes: { value: ChordType; active: boolean }[]
   setChordTypes: Dispatch<SetStateAction<any>>
   bpm: number
-  setBpm: Dispatch<SetStateAction<number>>
+  setBpm: Dispatch<SetStateAction<any>>
 }) {
   return (
     <div className="w-screen max-w-xl flex flex-col gap-y-3 p-4 bg-neutral-200 dark:bg-neutral-900 rounded-lg">

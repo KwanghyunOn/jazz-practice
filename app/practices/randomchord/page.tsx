@@ -9,25 +9,28 @@ import Modal from "@/components/Modal"
 import ChordDisplay from "@/components/ChordDisplay"
 import { Chord, MUSIC_KEYS, CHORD_TYPES } from "@/types/chord"
 import { getRandomElement } from "@/lib/utils"
+import { useStorage } from "@/lib/clientUtils"
 
 export default function RandomChordPractice({
   searchParams,
 }: {
   searchParams: { settings: boolean }
 }) {
-  const [roots, setRoots] = useState(
+  const [roots, setRoots] = useStorage(
+    "roots",
     MUSIC_KEYS.map((musicKey) => {
       return { value: musicKey, active: true }
     })
   )
-  const [chordTypes, setChordTypes] = useState(
+  const [chordTypes, setChordTypes] = useStorage(
+    "chordTypes",
     CHORD_TYPES.map((ct) => {
       return { value: ct, active: true }
     })
   )
+  const [bpm, setBpm] = useStorage("bpm", 120)
   const [chords, setChords] = useState([{} as Chord, {} as Chord])
   const [isPlaying, setIsPlaying] = useState(false)
-  const [bpm, setBpm] = useState<number>(120)
   const delay = ((1000 * 60) / bpm) * 4
   const settingsOpen = searchParams.settings
 
@@ -78,7 +81,7 @@ export default function RandomChordPractice({
       <div className="grow-[2] flex justify-center items-center">
         <PlayButton
           isPlaying={isPlaying}
-          onClick={(e) => {
+          onClick={() => {
             setIsPlaying(!isPlaying)
           }}
         />
