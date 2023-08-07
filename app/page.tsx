@@ -13,7 +13,7 @@ function MenuLink({
 }) {
   const chevronRightIcon = (
     <svg
-      className="h-8 w-8 stroke-1 stroke-neutral-800 fill-none"
+      className="h-8 w-8 stroke-1 stroke-neutral-800 dark:stroke-neutral-100 fill-none"
       viewBox="0 0 24 24"
       xmlns="http://www.w3.org/2000/svg"
     >
