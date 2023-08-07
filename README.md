@@ -1,4 +1,17 @@
-This is a [Next.js](https://nextjs.org/) project bootstrapped with [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app).
+## Todos
+### Features
+- Global
+  - [ ] Add diatonic chord practice.
+  - [ ] Add interval quiz.
+  - [ ] Add animation in page transitions.
+  - [ ] Add authentication (login).
+- Random chord practice
+  - [ ] Save settings in local storage.
+    - [ ] Add reset button in settings.
+  - [ ] Add metronome.
+  - [ ] Customize tempo slider.
+  - [ ] Toggle rare enharmonic chords. (C♭, B♯, F♭, E♯)
+
 
 ## Getting Started
 
