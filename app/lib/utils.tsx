@@ -48,8 +48,10 @@ export function getChordLabel(chordType: ChordType) {
 export function getScale(scaleKey: MusicKey, scaleType: ScaleType): Scale {
   switch (scaleType) {
     case "major":
+      // @ts-ignore
       return MAJOR_SCALE[scaleKey]
     case "natural minor":
+      // @ts-ignore
       return NATURAL_MINOR_SCALE[scaleKey]
     default:
       throw Error(`${scaleType} not implemented yet.`)

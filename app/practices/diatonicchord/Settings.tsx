@@ -89,6 +89,7 @@ function Dropdown({
                     setIsOpen(false)
                     onSelect(item)
                   }}
+                  key={item}
                 >
                   {item}
                 </button>
@@ -160,6 +161,7 @@ function ToggleGroup({
             setSelected(item)
             onSelect(item)
           }}
+          key={item}
         >
           {item}
         </div>

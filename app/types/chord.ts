@@ -14,6 +14,7 @@ export type MusicKey =
   | "E♭"
   | "E"
   | "E♯"
+  | "F♭"
   | "F"
   | "F♯"
   | "G♭"
