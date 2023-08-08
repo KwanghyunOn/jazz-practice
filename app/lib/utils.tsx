@@ -1,4 +1,14 @@
-import { ChordType } from "@/types/chord"
+import {
+  MusicKey,
+  ChordType,
+  ScaleType,
+  MAJOR_SCALE,
+  Scale,
+  MAJOR_DIATONIC_CHORDTYPE,
+  Chord,
+  NATURAL_MINOR_SCALE,
+  NATURAL_MINOR_DIATONIC_CHORDTYPE,
+} from "@/types/chord"
 
 export function exhaustiveCheck(param: never) {}
 
@@ -33,4 +43,29 @@ export function getChordLabel(chordType: ChordType) {
       exhaustiveCheck(chordType)
       throw new TypeError(`Unhandled chord type: ${chordType}`)
   }
+}
+
+export function getScale(scaleKey: MusicKey, scaleType: ScaleType): Scale {
+  switch (scaleType) {
+    case "major":
+      return MAJOR_SCALE[scaleKey]
+    case "natural minor":
+      return NATURAL_MINOR_SCALE[scaleKey]
+    default:
+      throw Error(`${scaleType} not implemented yet.`)
+  }
+}
+
+export function getDiatonicChords(
+  scaleKey: MusicKey,
+  scaleType: ScaleType
+): Chord[] {
+  const scale = getScale(scaleKey, scaleType)
+  const diatonics =
+    scaleType === "major"
+      ? MAJOR_DIATONIC_CHORDTYPE
+      : NATURAL_MINOR_DIATONIC_CHORDTYPE
+  return scale.map((key, index) => {
+    return { root: key, type: diatonics[index] }
+  })
 }
