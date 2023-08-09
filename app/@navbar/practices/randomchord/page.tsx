@@ -1,5 +1,10 @@
-import NavBar from "@/components/NavBar"
+import Navbar, { NavbarContentBack } from "@/components/Navbar"
 
 export default function PracticeNavBar() {
-  return <NavBar title="Random Chord Practice" hrefBack="/" />
+  return (
+    <Navbar
+      title="Random Chord Practice"
+      contentLeft={<NavbarContentBack href="/" />}
+    />
+  )
 }
