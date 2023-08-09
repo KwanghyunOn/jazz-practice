@@ -1,36 +1,46 @@
 "use client"
 
-import { useState, useEffect, useCallback } from "react"
+import {
+  useState,
+  useEffect,
+  useCallback,
+  Dispatch,
+  SetStateAction,
+} from "react"
 import Link from "next/link"
+import { usePathname } from "next/navigation"
 import { AnimatePresence } from "framer-motion"
 import Settings from "./Settings"
 import PlayButton from "@/components/PlayButton"
 import Modal from "@/components/Modal"
 import ChordDisplay from "@/components/ChordDisplay"
-import { MusicKey, Chord, ScaleType, MAJOR_SCALE } from "@/types/chord"
-import { getDiatonicChords, getRandomElement } from "@/lib/utils"
-import { useStorage } from "@/lib/clientUtils"
+import { Chord, Scale, MAJOR_SCALES } from "@/types/music"
+import { getRandomElement } from "@/lib/utils"
+import { getDiatonicChords } from "@/lib/music"
+import useStorage from "@/lib/useStorage"
 
 export default function DiatonicChordPractice({
   searchParams,
 }: {
   searchParams: { settings: boolean }
 }) {
-  const [scaleType, setScaleType]: [ScaleType, any] = useStorage(
-    "scaleType",
-    "major"
+  const [scale, setScale]: [Scale, Dispatch<SetStateAction<Scale>>] = useState(
+    MAJOR_SCALES[0]
   )
-  const [scaleKey, setScaleKey]: [MusicKey, any] = useStorage("scaleKey", "C")
-  const [bpm, setBpm] = useStorage("bpm", 120)
+  const [bpm, setBpm] = useState(120)
   const [chords, setChords] = useState([{} as Chord, {} as Chord])
   const [isPlaying, setIsPlaying] = useState(false)
   const delay = ((1000 * 60) / bpm) * 4
   const settingsOpen = searchParams.settings
 
-  const diatonicChords = getDiatonicChords(scaleKey, scaleType)
+  const diatonicChords = getDiatonicChords(scale)
   const getRandomChord = useCallback((): Chord => {
     return getRandomElement(diatonicChords)
   }, [diatonicChords])
+
+  const pathname = usePathname()
+  useStorage(`${pathname}:scale`, scale, setScale)
+  useStorage(`${pathname}:bpm`, bpm, setBpm)
 
   useEffect(() => {
     setChords([getRandomChord(), getRandomChord()])
@@ -85,10 +95,8 @@ export default function DiatonicChordPractice({
         {settingsOpen && (
           <Modal key="modal" placement="bottom">
             <Settings
-              scaleKey={scaleKey}
-              setScaleKey={setScaleKey}
-              scaleType={scaleType}
-              setScaleType={setScaleType}
+              scale={scale}
+              setScale={setScale}
               bpm={bpm}
               setBpm={setBpm}
             />

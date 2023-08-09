@@ -2,28 +2,22 @@
 
 import { useState, Dispatch, SetStateAction } from "react"
 import { AnimatePresence, motion } from "framer-motion"
-import {
-  ChordType,
-  MAJOR_SCALE,
-  MusicKey,
-  NATURAL_MINOR_SCALE,
-  ScaleType,
-} from "@/types/chord"
+import { ScaleType, Scale } from "@/types/music"
 import TempoSlider from "@/components/TempoSlider"
+import { getScalesFromType } from "@/lib/music"
 
 function Dropdown({
   items,
-  defaultItem,
+  selected,
   onSelect,
 }: {
   items: string[]
-  defaultItem: string
+  selected: string
   onSelect: (arg0: string) => void
 }) {
-  if (!items.includes(defaultItem)) {
-    throw Error(`${defaultItem} value not found in item list.`)
+  if (!items.includes(selected)) {
+    throw Error(`${selected} value not found in item list.`)
   }
-  const [selected, setSelected] = useState(defaultItem)
   const [isOpen, setIsOpen] = useState(false)
 
   const chevronDownIcon = (
@@ -50,8 +44,7 @@ function Dropdown({
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
             exit={{ opacity: 0 }}
-            onClick={(e) => {
-              console.log("backdrop!")
+            onClick={() => {
               setIsOpen(false)
             }}
           ></motion.div>
@@ -85,7 +78,6 @@ function Dropdown({
                       : "opacity-50 hover:opacity-80 hover:bg-neutral-200 dark:hover:bg-neutral-600"
                   } text-center text-lg rounded-md`}
                   onClick={() => {
-                    setSelected(item)
                     setIsOpen(false)
                     onSelect(item)
                   }}
@@ -103,33 +95,31 @@ function Dropdown({
 }
 
 function ScaleKeySettings({
-  scaleKey,
-  setScaleKey,
-  scaleType,
+  scale,
+  setScale,
 }: {
-  scaleKey: MusicKey
-  setScaleKey: Dispatch<SetStateAction<any>>
-  scaleType: ScaleType
+  scale: Scale
+  setScale: Dispatch<SetStateAction<Scale>>
 }) {
-  let availableKeys: MusicKey[]
-  switch (scaleType) {
-    case "major":
-      availableKeys = Object.keys(MAJOR_SCALE) as MusicKey[]
-      break
-    case "natural minor":
-      availableKeys = Object.keys(NATURAL_MINOR_SCALE) as MusicKey[]
-      break
-    default:
-      throw new Error(`${scaleType} not implemented.`)
+  const availableScales = getScalesFromType(scale.type)
+  const onSelect = (scaleKey: string) => {
+    const selectedScale = availableScales.find(
+      (scale) => scale.key === scaleKey
+    )
+    if (selectedScale) {
+      setScale(selectedScale)
+    } else {
+      throw Error(`${scaleKey} is unavailable in ${scale.type} scale.`)
+    }
   }
 
   return (
     <div className="flex flex-row justify-between items-center">
       <p className="text-xl font-semibold">Select key</p>
       <Dropdown
-        items={availableKeys}
-        defaultItem={scaleKey}
-        onSelect={(item) => setScaleKey(item)}
+        items={availableScales.map((scale) => scale.key)}
+        selected={scale.key}
+        onSelect={onSelect}
       />
     </div>
   )
@@ -137,16 +127,15 @@ function ScaleKeySettings({
 
 function ToggleGroup({
   items,
-  defaultItem,
+  selected,
   onSelect,
 }: {
   items: string[]
-  defaultItem: string
+  selected: string
   onSelect: (arg0: string) => void
 }) {
-  const [selected, setSelected] = useState(defaultItem)
-  if (!items.includes(defaultItem)) {
-    throw Error(`${defaultItem} value not found in item list.`)
+  if (!items.includes(selected)) {
+    throw Error(`${selected} value not found in item list.`)
   }
   return (
     <div className="flex flex-row items-center rounded-md overflow-hidden border border-solid border-neutral-300 dark:border-neutral-700">
@@ -158,7 +147,6 @@ function ToggleGroup({
               : "opacity-50 hover:opacity-80 hover:bg-neutral-200 dark:hover:bg-neutral-600"
           }`}
           onClick={() => {
-            setSelected(item)
             onSelect(item)
           }}
           key={item}
@@ -171,24 +159,47 @@ function ToggleGroup({
 }
 
 function ScaleTypeSettings({
-  scaleType,
-  setScaleType,
+  scale,
+  setScale,
 }: {
-  scaleType: ScaleType
-  setScaleType: Dispatch<SetStateAction<any>>
+  scale: Scale
+  setScale: Dispatch<SetStateAction<Scale>>
 }) {
-  const items: ScaleType[] = ["major", "natural minor"]
-  const label = { major: "major", "natural minor": "minor" }
-  const onSelect = (item: string) => {
-    if (item === "major") setScaleType("major")
-    else if (item === "minor") setScaleType("natural minor")
+  const items: { type: ScaleType; label: string }[] = [
+    {
+      type: "major",
+      label: "major",
+    },
+    {
+      type: "natural minor",
+      label: "minor",
+    },
+  ]
+  const onSelect = (label: string) => {
+    const selectedItem = items.find((item) => item.label === label)
+    if (selectedItem) {
+      const availableScales = getScalesFromType(selectedItem.type)
+      const selectedScale = availableScales.find((sc) => sc.key === scale.key)
+      if (selectedScale) {
+        setScale(selectedScale)
+      } else {
+        setScale(availableScales[0])
+      }
+    } else {
+      throw Error(`${label} do not exist in items.`)
+    }
+  }
+
+  const selectedItem = items.find((item) => item.type === scale.type)
+  if (!selectedItem) {
+    throw Error(`${scale.type} scale is not available.`)
   }
   return (
     <div className="flex flex-row justify-between items-center">
       <p className="text-xl font-semibold">Scale type</p>
       <ToggleGroup
-        items={items.map((item) => label[item])}
-        defaultItem="major"
+        items={items.map((item) => item.label)}
+        selected={selectedItem.label}
         onSelect={onSelect}
       />
     </div>
@@ -204,19 +215,15 @@ function ItemWrapper({ children }: { children: React.ReactNode }) {
 }
 
 export default function DiatonicChordPracticeSettings({
-  scaleKey,
-  setScaleKey,
-  scaleType,
-  setScaleType,
+  scale,
+  setScale,
   bpm,
   setBpm,
 }: {
-  scaleKey: MusicKey
-  setScaleKey: Dispatch<SetStateAction<any>>
-  scaleType: ScaleType
-  setScaleType: Dispatch<SetStateAction<any>>
+  scale: Scale
+  setScale: Dispatch<SetStateAction<Scale>>
   bpm: number
-  setBpm: Dispatch<SetStateAction<any>>
+  setBpm: Dispatch<SetStateAction<number>>
 }) {
   return (
     <div className="w-screen max-w-xl flex flex-col gap-y-3 p-4 bg-neutral-200 dark:bg-neutral-900 rounded-lg">
@@ -225,14 +232,10 @@ export default function DiatonicChordPracticeSettings({
         <TempoSlider bpm={bpm} setBpm={setBpm} />
       </ItemWrapper>
       <ItemWrapper>
-        <ScaleKeySettings
-          scaleKey={scaleKey}
-          setScaleKey={setScaleKey}
-          scaleType={scaleType}
-        />
+        <ScaleKeySettings scale={scale} setScale={setScale} />
       </ItemWrapper>
       <ItemWrapper>
-        <ScaleTypeSettings scaleType={scaleType} setScaleType={setScaleType} />
+        <ScaleTypeSettings scale={scale} setScale={setScale} />
       </ItemWrapper>
     </div>
   )

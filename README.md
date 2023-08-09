@@ -1,13 +1,13 @@
 ## Todos
 ### Features
 - Global
-  - [ ] Add diatonic chord practice.
+  - [x] Add diatonic chord practice.
   - [ ] Add interval quiz.
   - [ ] Add animation in page transitions.
   - [ ] Add authentication (login).
 - Random chord practice
-  - [ ] Save settings in local storage.
-    - [ ] Add reset button in settings.
+  - [x] Save settings in local storage.
+  - [ ] Add reset button in settings.
   - [ ] Add metronome.
   - [ ] Customize tempo slider.
   - [ ] Toggle rare enharmonic chords. (C♭, B♯, F♭, E♯)

@@ -2,37 +2,41 @@
 
 import { useState, useEffect, useCallback } from "react"
 import Link from "next/link"
+import { usePathname } from "next/navigation"
 import { AnimatePresence } from "framer-motion"
 import Settings from "./Settings"
 import PlayButton from "@/components/PlayButton"
 import Modal from "@/components/Modal"
 import ChordDisplay from "@/components/ChordDisplay"
-import { Chord, MUSIC_KEYS, CHORD_TYPES } from "@/types/chord"
+import { Chord, MUSIC_KEYS, CHORD_TYPES } from "@/types/music"
 import { getRandomElement } from "@/lib/utils"
-import { useStorage } from "@/lib/clientUtils"
+import useStorage from "@/lib/useStorage"
 
 export default function RandomChordPractice({
   searchParams,
 }: {
   searchParams: { settings: boolean }
 }) {
-  const [roots, setRoots] = useStorage(
-    "roots",
+  const [roots, setRoots] = useState(
     MUSIC_KEYS.map((musicKey) => {
       return { value: musicKey, active: true }
     })
   )
-  const [chordTypes, setChordTypes] = useStorage(
-    "chordTypes",
+  const [chordTypes, setChordTypes] = useState(
     CHORD_TYPES.map((ct) => {
       return { value: ct, active: true }
     })
   )
-  const [bpm, setBpm] = useStorage("bpm", 120)
+  const [bpm, setBpm] = useState(120)
   const [chords, setChords] = useState([{} as Chord, {} as Chord])
   const [isPlaying, setIsPlaying] = useState(false)
   const delay = ((1000 * 60) / bpm) * 4
   const settingsOpen = searchParams.settings
+
+  const pathname = usePathname()
+  useStorage(`${pathname}:roots`, roots, setRoots)
+  useStorage(`${pathname}:chordTypes`, chordTypes, setChordTypes)
+  useStorage(`${pathname}:bpm`, bpm, setBpm)
 
   const getRandomChord = useCallback((): Chord => {
     return {

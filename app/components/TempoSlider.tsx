@@ -1,6 +1,6 @@
 "use client"
 
-import { useState, Dispatch, SetStateAction } from "react"
+import { useState, useEffect, Dispatch, SetStateAction } from "react"
 
 export default function TempoSlider({
   bpm,
@@ -12,6 +12,8 @@ export default function TempoSlider({
   const minBpm = 30
   const maxBpm = 200
   const [sliderValue, setSliderValue] = useState(bpm)
+
+  useEffect(() => setSliderValue(bpm), [bpm])
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     setSliderValue(Number(e.target.value))

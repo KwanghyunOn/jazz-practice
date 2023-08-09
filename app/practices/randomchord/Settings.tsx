@@ -1,10 +1,10 @@
 "use client"
 
 import { Dispatch, SetStateAction } from "react"
-import { ChordType, MusicKey } from "@/types/chord"
 import CheckBox from "@/components/CheckBox"
-import { getChordLabel } from "@/lib/utils"
 import TempoSlider from "@/components/TempoSlider"
+import { ChordType, MusicKey } from "@/types/music"
+import { getChordLabel } from "@/lib/music"
 
 function RootSettings({
   roots,

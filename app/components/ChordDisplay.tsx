@@ -1,4 +1,4 @@
-import { ChordType, Chord } from "@/types/chord"
+import { ChordType, Chord } from "@/types/music"
 
 function renderChordType(chordType: ChordType) {
   switch (chordType) {
