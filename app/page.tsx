@@ -56,10 +56,9 @@ export default function Home() {
           desc="Practice diatonic chords."
         />
         <MenuLink
-          href="#"
+          href="/practices/intervalquiz"
           title="Interval quiz"
-          desc="Interval quiz..."
-          disabled
+          desc="Interval quiz"
         />
       </div>
     </main>

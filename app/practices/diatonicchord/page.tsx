@@ -24,9 +24,7 @@ export default function DiatonicChordPractice({
 }: {
   searchParams: { settings: boolean }
 }) {
-  const [scale, setScale]: [Scale, Dispatch<SetStateAction<Scale>>] = useState(
-    MAJOR_SCALES[0]
-  )
+  const [scale, setScale] = useState<Scale>(MAJOR_SCALES[0])
   const [bpm, setBpm] = useState(120)
   const [chords, setChords] = useState([{} as Chord, {} as Chord])
   const [isPlaying, setIsPlaying] = useState(false)

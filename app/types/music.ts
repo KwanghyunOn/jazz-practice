@@ -22,13 +22,12 @@ export type MusicKey =
   | "G♯"
 
 export const MUSIC_KEYS: MusicKey[] = [
-  "A♭",
   "A",
   "A♯",
   "B♭",
   "B",
-  "B♯",
   "C♭",
+  "B♯",
   "C",
   "C♯",
   "D♭",
@@ -36,12 +35,14 @@ export const MUSIC_KEYS: MusicKey[] = [
   "D♯",
   "E♭",
   "E",
+  "F♭",
   "E♯",
   "F",
   "F♯",
   "G♭",
   "G",
   "G♯",
+  "A♭",
 ]
 
 export const GENERAL_MUSIC_KEYS: MusicKey[] = [
@@ -219,4 +220,39 @@ export const NATURAL_MINOR_DIATONIC_CHORDTYPE: ChordType[] = [
   "minor7",
   "major7",
   "dominant7",
+]
+
+export type Interval =
+  | "minor 2nd"
+  | "major 2nd"
+  | "minor 3rd"
+  | "major 3rd"
+  | "perfect 4th"
+  | "tritone"
+  | "augmented 4th"
+  | "diminished 5th"
+  | "perfect 5th"
+  | "minor 6th"
+  | "augmented 5th"
+  | "major 6th"
+  | "minor 7th"
+  | "augmented 6th"
+  | "major 7th"
+
+export const INTERVALS = [
+  "minor 2nd",
+  "major 2nd",
+  "minor 3rd",
+  "major 3rd",
+  "perfect 4th",
+  "tritone",
+  "augmented 4th",
+  "diminished 5th",
+  "perfect 5th",
+  "minor 6th",
+  "augmented 5th",
+  "major 6th",
+  "minor 7th",
+  "augmented 6th",
+  "major 7th",
 ]
