@@ -1,4 +1,4 @@
-import Navbar, { NavbarContentMenu } from "@/components/Navbar"
+import { Navbar, NavbarContentMenu } from "@/components/Navbar"
 
 export default function PracticeNavBar() {
   return (

@@ -55,7 +55,7 @@ export function NavbarContentBack({
   )
 }
 
-export default function Navbar({
+export function Navbar({
   title,
   contentLeft = null,
   contentRight = null,

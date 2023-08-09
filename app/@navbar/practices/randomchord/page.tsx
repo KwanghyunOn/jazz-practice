@@ -1,4 +1,4 @@
-import Navbar, { NavbarContentBack } from "@/components/Navbar"
+import { Navbar, NavbarContentBack } from "@/components/Navbar"
 
 export default function PracticeNavBar() {
   return (
