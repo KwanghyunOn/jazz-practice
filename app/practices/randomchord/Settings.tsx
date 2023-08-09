@@ -1,47 +1,79 @@
 "use client"
 
-import { Dispatch, SetStateAction } from "react"
+import { useState, useRef, Dispatch, SetStateAction } from "react"
+import { usePathname } from "next/navigation"
 import CheckBox from "@/components/CheckBox"
 import TempoSlider from "@/components/TempoSlider"
-import { ChordType, MusicKey } from "@/types/music"
+import { ChordType, MusicKey, GENERAL_MUSIC_KEYS } from "@/types/music"
 import { getChordLabel } from "@/lib/music"
+import useStorage from "@/lib/useStorage"
+import Switch from "@/components/Switch"
 
 function RootSettings({
   roots,
   setRoots,
+  showEnharmonic,
+  setShowEnharmonic,
 }: {
   roots: { value: MusicKey; active: boolean }[]
   setRoots: Dispatch<SetStateAction<any>>
+  showEnharmonic: boolean
+  setShowEnharmonic: Dispatch<SetStateAction<boolean>>
 }) {
+  const handleSwitch = () => {
+    if (showEnharmonic) {
+      setRoots(
+        roots.map((root) => {
+          if (GENERAL_MUSIC_KEYS.includes(root.value)) {
+            return root
+          } else {
+            return {
+              ...root,
+              active: false,
+            }
+          }
+        })
+      )
+    }
+    setShowEnharmonic(!showEnharmonic)
+  }
+
   return (
     <div>
       <p className="mb-2 text-xl font-semibold">Roots</p>
+      <div className="my-4 flex flex-row justify-between items-center">
+        <p className="text-base">Show enharmonic chords</p>
+        <Switch checked={showEnharmonic} onChange={handleSwitch} />
+      </div>
       <div className="grid grid-cols-4 sm:grid-cols-6 gap-1.5">
-        {roots.map((root) => (
-          <button
-            className={`px-2 py-2 text-lg font-semibold rounded-md btn-primary ${
-              root.active ? "" : "opacity-50"
-            }`}
-            onClick={(e) => {
-              setRoots(
-                roots.map((root) => {
-                  if (root.value === e.currentTarget.name) {
-                    return {
-                      ...root,
-                      active: !root.active,
-                    }
-                  } else {
-                    return root
-                  }
-                })
-              )
-            }}
-            name={root.value}
-            key={root.value}
-          >
-            {root.value}
-          </button>
-        ))}
+        {roots.map(
+          (root) =>
+            (showEnharmonic || GENERAL_MUSIC_KEYS.includes(root.value)) && (
+              <button
+                className={`px-2 py-2 text-lg font-semibold rounded-md btn-primary ${
+                  root.active ? "" : "opacity-50"
+                }`}
+                onClick={(e) => {
+                  setRoots(
+                    roots.map((root) => {
+                      if (root.value === e.currentTarget.name) {
+                        return {
+                          ...root,
+                          active: !root.active,
+                        }
+                      } else {
+                        return root
+                      }
+                    })
+                  )
+                }}
+                name={root.value}
+                key={root.value}
+              >
+                {root.value}
+              </button>
+            )
+        )}
       </div>
     </div>
   )
@@ -174,6 +206,8 @@ function ItemWrapper({ children }: { children: React.ReactNode }) {
 export default function RandomChordPracticeSettings({
   roots,
   setRoots,
+  showEnharmonic,
+  setShowEnharmonic,
   chordTypes,
   setChordTypes,
   bpm,
@@ -181,6 +215,8 @@ export default function RandomChordPracticeSettings({
 }: {
   roots: { value: MusicKey; active: boolean }[]
   setRoots: Dispatch<SetStateAction<any>>
+  showEnharmonic: boolean
+  setShowEnharmonic: Dispatch<SetStateAction<boolean>>
   chordTypes: { value: ChordType; active: boolean }[]
   setChordTypes: Dispatch<SetStateAction<any>>
   bpm: number
@@ -193,7 +229,12 @@ export default function RandomChordPracticeSettings({
         <TempoSlider bpm={bpm} setBpm={setBpm} />
       </ItemWrapper>
       <ItemWrapper>
-        <RootSettings roots={roots} setRoots={setRoots} />
+        <RootSettings
+          roots={roots}
+          setRoots={setRoots}
+          showEnharmonic={showEnharmonic}
+          setShowEnharmonic={setShowEnharmonic}
+        />
       </ItemWrapper>
       <ItemWrapper>
         <ChordSettings chordTypes={chordTypes} setChordTypes={setChordTypes} />

@@ -28,6 +28,7 @@ export default function RandomChordPractice({
     })
   )
   const [bpm, setBpm] = useState(120)
+  const [showEnharmonic, setShowEnharmonic] = useState(false)
   const [chords, setChords] = useState([{} as Chord, {} as Chord])
   const [isPlaying, setIsPlaying] = useState(false)
   const delay = ((1000 * 60) / bpm) * 4
@@ -37,6 +38,7 @@ export default function RandomChordPractice({
   useStorage(`${pathname}:roots`, roots, setRoots)
   useStorage(`${pathname}:chordTypes`, chordTypes, setChordTypes)
   useStorage(`${pathname}:bpm`, bpm, setBpm)
+  useStorage(`${pathname}:showEnharmonic`, showEnharmonic, setShowEnharmonic)
 
   const getRandomChord = useCallback((): Chord => {
     return {
@@ -104,6 +106,8 @@ export default function RandomChordPractice({
             <Settings
               roots={roots}
               setRoots={setRoots}
+              showEnharmonic={showEnharmonic}
+              setShowEnharmonic={setShowEnharmonic}
               chordTypes={chordTypes}
               setChordTypes={setChordTypes}
               bpm={bpm}
