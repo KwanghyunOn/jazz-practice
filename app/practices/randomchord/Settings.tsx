@@ -1,12 +1,10 @@
 "use client"
 
-import { useState, useRef, Dispatch, SetStateAction } from "react"
-import { usePathname } from "next/navigation"
+import { Dispatch, SetStateAction } from "react"
 import CheckBox from "@/components/CheckBox"
 import TempoSlider from "@/components/TempoSlider"
 import { ChordType, MusicKey, GENERAL_MUSIC_KEYS } from "@/types/music"
 import { getChordLabel } from "@/lib/music"
-import useStorage from "@/lib/useStorage"
 import Switch from "@/components/Switch"
 
 function RootSettings({
@@ -108,10 +106,10 @@ function ChordSettings({
       <div className="grid grid-cols-2">
         <div>
           <CheckBox
-            size="md"
+            size="lg"
             name="triads"
             label="Triads"
-            checked={triads.some((chordType) => chordType.active)}
+            checked={triads.every((chordType) => chordType.active)}
             onChange={(e) => {
               setChordTypes([
                 ...triads.map((chordType) => ({
@@ -121,11 +119,12 @@ function ChordSettings({
                 ...sevenths,
               ])
             }}
+            labelClass="font-semibold"
           />
           <div className="flex flex-col ml-2 gap-0.5">
             {triads.map((chordType) => (
               <CheckBox
-                size="sm"
+                size="md"
                 name={chordType.value}
                 label={getChordLabel(chordType.value)}
                 checked={chordType.active}
@@ -150,10 +149,10 @@ function ChordSettings({
         </div>
         <div>
           <CheckBox
-            size="md"
+            size="lg"
             name="sevenths"
             label="7th Chords"
-            checked={sevenths.some((chordType) => chordType.active)}
+            checked={sevenths.every((chordType) => chordType.active)}
             onChange={(e) => {
               setChordTypes([
                 ...sevenths.map((chordType) => ({
@@ -163,11 +162,12 @@ function ChordSettings({
                 ...triads,
               ])
             }}
+            labelClass="font-semibold"
           />
           <div className="flex flex-col ml-2 gap-0.5">
             {sevenths.map((chordType) => (
               <CheckBox
-                size="sm"
+                size="md"
                 name={chordType.value}
                 label={getChordLabel(chordType.value)}
                 checked={chordType.active}

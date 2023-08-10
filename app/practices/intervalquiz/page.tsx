@@ -12,6 +12,7 @@ import {
 } from "@/types/music"
 import useStorage from "@/lib/useStorage"
 import { usePathname } from "next/navigation"
+import IntervalQuizHome from "./QuizHome"
 
 type IntervalQuiz = {
   root: MusicKey
@@ -38,13 +39,14 @@ const getRandomQuiz = (): IntervalQuiz => {
 }
 
 export default function IntervalQuizPractice() {
+  const [quizStarted, setQuizStarted] = useState(false)
   const [intervals, setIntervals] = useState(
     INTERVALS.map((interval) => ({ value: interval, active: true }))
   )
   const [roots, setRoots] = useState(
     GENERAL_MUSIC_KEYS.map((root) => ({ value: root, active: true }))
   )
-  const [quiz, setQuiz] = useState<IntervalQuiz>(getRandomQuiz())
+  const [quiz, setQuiz] = useState<IntervalQuiz>({} as IntervalQuiz)
   const [result, setResult] = useState<QuizResult>({
     total: 0,
     correct: 0,
@@ -60,6 +62,14 @@ export default function IntervalQuizPractice() {
   const handleSubmit = (e: React.MouseEvent<HTMLButtonElement>) => {
     setGuess(e.currentTarget.name as MusicKey)
   }
+
+  useEffect(() => {
+    if (quizStarted) {
+      setQuiz(getRandomQuiz())
+      setResult({ total: 0, correct: 0, totalResponseTime: 0.0 })
+      quizStartTime.current = new Date().getTime()
+    }
+  }, [quizStarted])
 
   useEffect(() => {
     if (guess) {
@@ -83,7 +93,17 @@ export default function IntervalQuizPractice() {
     }
   }, [guess])
 
-  return (
+  return !quizStarted ? (
+    <IntervalQuizHome
+      roots={roots}
+      setRoots={setRoots}
+      intervals={intervals}
+      setIntervals={setIntervals}
+      onStart={() => {
+        setQuizStarted(true)
+      }}
+    />
+  ) : (
     <div className="w-screen max-w-xl flex flex-col items-center gap-8 pt-8">
       <div className="flex flex-col items-center gap-2">
         <p className="text-4xl font-semibold">{quiz.interval}</p>
@@ -121,6 +141,14 @@ export default function IntervalQuizPractice() {
             : (result.totalResponseTime / result.total / 1000).toFixed(2)
         }s`}</p>
       </div>
+      <button
+        className="btn-primary self-center px-10 py-2 text-xl font-semibold"
+        onClick={() => {
+          setQuizStarted(false)
+        }}
+      >
+        <p>Stop quiz</p>
+      </button>
     </div>
   )
 }

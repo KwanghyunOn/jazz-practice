@@ -239,7 +239,7 @@ export type Interval =
   | "augmented 6th"
   | "major 7th"
 
-export const INTERVALS = [
+export const INTERVALS: Interval[] = [
   "minor 2nd",
   "major 2nd",
   "minor 3rd",
