@@ -1,6 +1,6 @@
 "use client"
 
-import { useState, useEffect, useRef } from "react"
+import { useState, useEffect, useRef, useCallback } from "react"
 import { calculateKeyFromInterval } from "@/lib/music"
 import { getRandomElement } from "@/lib/utils"
 import {
@@ -27,9 +27,12 @@ type QuizResult = {
   totalResponseTime: number
 }
 
-const getRandomQuiz = (): IntervalQuiz => {
-  const root = getRandomElement(GENERAL_MUSIC_KEYS)
-  const interval = getRandomElement(INTERVALS)
+const getRandomQuiz = (
+  activeRoots: MusicKey[],
+  activeIntervals: Interval[]
+): IntervalQuiz => {
+  const root = getRandomElement(activeRoots)
+  const interval = getRandomElement(activeIntervals)
   return {
     root: root,
     interval: interval,
@@ -65,7 +68,14 @@ export default function IntervalQuizPractice() {
 
   useEffect(() => {
     if (quizStarted) {
-      setQuiz(getRandomQuiz())
+      setQuiz(
+        getRandomQuiz(
+          roots.filter((root) => root.active).map((root) => root.value),
+          intervals
+            .filter((interval) => interval.active)
+            .map((interval) => interval.value)
+        )
+      )
       setResult({ total: 0, correct: 0, totalResponseTime: 0.0 })
       quizStartTime.current = new Date().getTime()
     }
@@ -87,7 +97,14 @@ export default function IntervalQuizPractice() {
       }, 1000)
       return () => {
         clearInterval(intervalId)
-        setQuiz(getRandomQuiz())
+        setQuiz(
+          getRandomQuiz(
+            roots.filter((root) => root.active).map((root) => root.value),
+            intervals
+              .filter((interval) => interval.active)
+              .map((interval) => interval.value)
+          )
+        )
         quizStartTime.current = new Date().getTime()
       }
     }

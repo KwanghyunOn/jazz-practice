@@ -2,7 +2,13 @@ import { Dispatch, SetStateAction } from "react"
 import { MusicKey, Interval } from "@/types/music"
 import CheckBox from "@/components/CheckBox"
 
-function QuizStart({ onStart }: { onStart: React.MouseEventHandler }) {
+function QuizStart({
+  onStart,
+  disabled,
+}: {
+  onStart: React.MouseEventHandler
+  disabled: boolean
+}) {
   return (
     <div className="bg-neutral-100 dark:bg-neutral-800 rounded-lg flex flex-col items-center p-6 gap-6">
       <div className="w-[80%] text-center text-xl font-semibold">
@@ -16,7 +22,9 @@ function QuizStart({ onStart }: { onStart: React.MouseEventHandler }) {
         </div>
       </div>
       <button
-        className="btn-primary w-1/2 self-center p-2 text-xl font-semibold"
+        className={`btn-primary w-1/2 self-center p-2 text-xl font-semibold ${
+          disabled && "pointer-events-none opacity-50"
+        }`}
         onClick={onStart}
       >
         <p>Start quiz</p>
@@ -163,7 +171,13 @@ export default function IntervalQuizHome({
 }) {
   return (
     <div className="w-screen max-w-xl flex flex-col gap-y-3 p-4 bg-neutral-200 dark:bg-neutral-900 rounded-lg">
-      <QuizStart onStart={onStart} />
+      <QuizStart
+        onStart={onStart}
+        disabled={
+          !roots.some((root) => root.active) ||
+          !intervals.some((interval) => interval.active)
+        }
+      />
       <p className="py-1 text-xl font-semibold">Quiz Settings</p>
       <ItemWrapper>
         <RootSettings roots={roots} setRoots={setRoots} />
