@@ -1,24 +1,24 @@
 ## Todos
 ### Features
-- General
-  - [x] Add diatonic chord practice.
-  - [x] Add interval quiz practice.
-  - [ ] Implement animated page transitions.
-  - [ ] Establish user authentication (login functionality).
-- Random chord practice
-  - [x] Save user preferences in local storage.
-  - [ ] Add a settings reset button.
-  - [ ] Add metronome feature.
-  - [ ] Customize tempo slider component.
-  - [x] Enable toggling of rare enharmonic chords (C♭, B♯, F♭, E♯).
-- Interval quiz
-  - [ ] Provide an option to set the number of quiz questions.
-  - [ ] Provide an option to invert intervals.
-  - [ ] Develop a dedicated results page.
-  - [ ] Create a user-specific history for quiz results.
+#### General
+- [x] Add diatonic chord practice.
+- [x] Add interval quiz practice.
+- [ ] Implement animated page transitions.
+- [ ] Establish user authentication (login functionality).
+#### Random chord practice
+- [x] Save user preferences in local storage.
+- [ ] Add a settings reset button.
+- [ ] Add metronome feature.
+- [ ] Customize tempo slider component.
+- [x] Enable toggling of rare enharmonic chords (C♭, B♯, F♭, E♯).
+#### Interval quiz
+- [ ] Provide an option to set the number of quiz questions.
+- [ ] Provide an option to invert intervals.
+- [ ] Develop a dedicated results page.
+- [ ] Create a user-specific history for quiz results.
 ### Bugs
-- Diatonic chord practice
-  - [ ] Enharmonic toggle shifts the content.
+#### Diatonic chord practice
+- [ ] Enharmonic toggle shifts the content.
 
 
 ## Getting Started

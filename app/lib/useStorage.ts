@@ -6,7 +6,7 @@ export default function useStorage<T>(
   key: string,
   state: T,
   setState: Dispatch<SetStateAction<T>>,
-  storageType: "local" | "session" = "session"
+  storageType: "local" | "session" = "local"
 ) {
   useEffect(() => {
     const storage = storageType === "local" ? localStorage : sessionStorage

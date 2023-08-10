@@ -78,7 +78,7 @@ export default function DiatonicChordPractice({
       <div className="grow-[1.5] w-full flex justify-center items-center">
         <Link
           href="?settings=true"
-          className="w-2/3 max-w-xs md:max-w-sm p-4 btn-primary text-white text-xl md:text-2xl font-semibold rounded-full text-center select-none"
+          className="px-12 md:px-16 py-4 btn-primary text-white text-xl md:text-2xl font-semibold rounded-full text-center select-none"
         >
           Settings
         </Link>
