@@ -65,7 +65,7 @@ export function Navbar({
   contentRight?: React.ReactNode | null
 }) {
   return (
-    <div className="sticky w-full py-4 px-2 grid grid-cols-6 items-center bg-neutral-100 dark:bg-neutral-800">
+    <div className="w-full py-4 px-2 grid grid-cols-6 items-center bg-neutral-100 dark:bg-neutral-800">
       {contentLeft}
       <h1 className="col-start-2 col-end-6 font-semibold text-xl text-center">
         {title}
