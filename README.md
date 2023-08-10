@@ -16,6 +16,9 @@
   - [ ] Provide an option to invert intervals.
   - [ ] Develop a dedicated results page.
   - [ ] Create a user-specific history for quiz results.
+### Bugs
+- Diatonic chord practice
+  - [ ] Enharmonic toggle shifts the content.
 
 
 ## Getting Started

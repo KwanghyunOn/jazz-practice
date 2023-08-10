@@ -141,7 +141,7 @@ function ToggleGroup({
     <div className="flex flex-row items-center rounded-md overflow-hidden border border-solid border-neutral-300 dark:border-neutral-700">
       {items.map((item) => (
         <div
-          className={`px-4 py-2 ${
+          className={`px-4 py-2 cursor-pointer select-none ${
             item === selected
               ? "text-neutral-100 bg-indigo-500"
               : "opacity-50 hover:opacity-80 hover:bg-neutral-200 dark:hover:bg-neutral-600"

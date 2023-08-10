@@ -61,7 +61,7 @@ export default function CheckBox({
   )
   return (
     <div
-      className={`${containerSize} flex flex-row justify-start items-center hover:bg-neutral-100 hover:dark:bg-neutral-700 rounded-md cursor-pointer ${containerClass}`}
+      className={`${containerSize} flex flex-row justify-start items-center hover:bg-neutral-200 hover:dark:bg-neutral-700 rounded-md cursor-pointer ${containerClass}`}
       onClick={(e) => {
         if (e.target === e.currentTarget) {
           if (inputRef.current) inputRef.current.click()
@@ -71,7 +71,7 @@ export default function CheckBox({
       <div className="relative flex items-center justify-center">
         <input
           className={`peer shrink-0 ${inputSize} border-[0.1rem] border-neutral-400 appearance-none outline-none rounded-sm cursor-pointer
-        checked:bg-indigo-700 checked:border-indigo-700`}
+        checked:bg-indigo-500 checked:border-indigo-500 checked:dark:bg-indigo-700 checked:dark:border-indigo-700`}
           type="checkbox"
           checked={checked}
           onChange={onChange}

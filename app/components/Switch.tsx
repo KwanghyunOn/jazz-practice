@@ -8,10 +8,23 @@ export default function Switch({
   checked: boolean
   onChange: any
 }) {
+  const isDarkMode =
+    window.matchMedia &&
+    window.matchMedia("(prefers-color-scheme: dark)").matches
   // @ts-ignore
-  const bgColorOn = fullTailwindConfig.theme.colors.indigo[500]
+  console.log(fullTailwindConfig)
   // @ts-ignore
-  const bgColorOff = fullTailwindConfig.theme.colors.neutral[600]
+  const bgColorOn = isDarkMode
+    ? // @ts-ignore
+      fullTailwindConfig.theme.colors.indigo[500]
+    : // @ts-ignore
+      fullTailwindConfig.theme.colors.indigo[400]
+  // @ts-ignore
+  const bgColorOff = isDarkMode
+    ? // @ts-ignore
+      fullTailwindConfig.theme.colors.neutral[600]
+    : // @ts-ignore
+      fullTailwindConfig.theme.colors.neutral[300]
 
   return (
     <motion.div
@@ -20,11 +33,7 @@ export default function Switch({
         backgroundColor: checked ? bgColorOn : bgColorOff,
       }}
       className={`w-[3.06rem] h-[1.8rem] p-[0.18rem] flex items-center cursor-pointer rounded-full
-          ${
-            checked
-              ? "bg-indigo-500 justify-end"
-              : "bg-neutral-500 justify-start"
-          }`}
+          ${checked ? "justify-end" : "justify-start"}`}
       onClick={onChange}
     >
       <motion.div
