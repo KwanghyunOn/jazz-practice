@@ -5,7 +5,7 @@ export default function PlayButton({
   isPlaying: boolean
   onClick: React.MouseEventHandler
 }) {
-  const svgClass = "w-16 h-16 md:w-24 md:h-24 stroke-0 fill-slate-50"
+  const svgClass = "w-16 h-16 md:w-24 md:h-24 stroke-0 fill-neutral-50"
   const pauseIcon = (
     <svg
       className={svgClass}

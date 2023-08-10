@@ -13,6 +13,7 @@
   - [x] Enable toggling of rare enharmonic chords (C♭, B♯, F♭, E♯).
 - Interval quiz
   - [ ] Provide an option to set the number of quiz questions.
+  - [ ] Provide an option to invert intervals.
   - [ ] Develop a dedicated results page.
   - [ ] Create a user-specific history for quiz results.
 
