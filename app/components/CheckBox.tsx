@@ -40,7 +40,7 @@ export default function CheckBox({
     case "xl":
       containerSize = "p-[0.42rem]"
       inputSize = "h-[1.4rem] w-[1.4rem]"
-      svgSize = "h-[1.12rem] w-[1.12rem] stroke-[0.28rem]"
+      svgSize = "h-[1.12rem] w-[1.12rem] stroke-[0.24rem]"
       labelSize = "ml-[0.56rem] text-[1.12rem]"
       break
   }

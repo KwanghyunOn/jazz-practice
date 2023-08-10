@@ -78,7 +78,7 @@ function IntervalsSettings({
   return (
     <div>
       <p className="py-2 text-xl font-semibold">Intervals</p>
-      <p className="py-1 text-base font-semibold">Diatonics</p>
+      <p className="py-1 text-lg font-semibold">Diatonics</p>
       <div className="grid grid-cols-2 gap-1">
         {intervals
           .filter((interval) => isDiatonic(interval.value))
@@ -87,7 +87,7 @@ function IntervalsSettings({
               name={interval.value}
               label={interval.value}
               checked={interval.active}
-              size="lg"
+              size="xl"
               onChange={(e) => {
                 setIntervals(
                   intervals.map((interval) => {
@@ -106,7 +106,7 @@ function IntervalsSettings({
             />
           ))}
       </div>
-      <p className="py-1 text-base font-semibold">Non-diatonics</p>
+      <p className="py-1 text-lg font-semibold">Non-diatonics</p>
       <div className="grid grid-cols-2 gap-1">
         {intervals
           .filter((interval) => !isDiatonic(interval.value))
@@ -117,7 +117,7 @@ function IntervalsSettings({
                 .replace("diminished", "dim")
                 .replace("augmented", "aug")}
               checked={interval.active}
-              size="lg"
+              size="xl"
               onChange={(e) => {
                 setIntervals(
                   intervals.map((interval) => {

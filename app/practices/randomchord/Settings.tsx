@@ -106,7 +106,7 @@ function ChordSettings({
       <div className="grid grid-cols-2">
         <div>
           <CheckBox
-            size="lg"
+            size="xl"
             name="triads"
             label="Triads"
             checked={triads.every((chordType) => chordType.active)}
@@ -124,7 +124,7 @@ function ChordSettings({
           <div className="flex flex-col ml-2 gap-0.5">
             {triads.map((chordType) => (
               <CheckBox
-                size="md"
+                size="lg"
                 name={chordType.value}
                 label={getChordLabel(chordType.value)}
                 checked={chordType.active}
@@ -149,7 +149,7 @@ function ChordSettings({
         </div>
         <div>
           <CheckBox
-            size="lg"
+            size="xl"
             name="sevenths"
             label="7th Chords"
             checked={sevenths.every((chordType) => chordType.active)}
@@ -167,7 +167,7 @@ function ChordSettings({
           <div className="flex flex-col ml-2 gap-0.5">
             {sevenths.map((chordType) => (
               <CheckBox
-                size="md"
+                size="lg"
                 name={chordType.value}
                 label={getChordLabel(chordType.value)}
                 checked={chordType.active}
