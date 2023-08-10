@@ -1,59 +1,92 @@
+import { useRef } from "react"
+
 export default function CheckBox({
   name,
   label,
   checked,
   onChange,
   size = "md",
+  containerClass = "",
+  labelClass = "",
 }: {
   name: string
   label: string
   checked: boolean
   onChange: React.ChangeEventHandler<HTMLInputElement>
-  size: "sm" | "md"
+  size?: "sm" | "md" | "lg" | "xl"
+  containerClass?: string
+  labelClass?: string
 }) {
-  let inputSize, svgSize, labelSize
+  let containerSize, inputSize, svgSize, labelSize
   switch (size) {
     case "sm":
-      inputSize = "h-4 w-4"
-      svgSize = "ml-[0.1rem] h-3 w-3"
-      labelSize = "pl-1 text-md"
+      containerSize = "p-[0.3rem]"
+      inputSize = "h-[1rem] w-[1rem]"
+      svgSize = "h-[0.8rem] w-[0.8rem] stroke-[0.2rem]"
+      labelSize = "ml-[0.4rem] text-[0.8rem]"
       break
     case "md":
-      inputSize = "h-5 w-5"
-      svgSize = "ml-[0.125rem] h-[0.9375rem] w-[0.9375rem]"
-      labelSize = "pl-[0.3125rem] text-lg"
+      containerSize = "p-[0.33rem]"
+      inputSize = "h-[1.1rem] w-[1.1rem]"
+      svgSize = "h-[0.88rem] w-[0.88rem] stroke-[0.22rem]"
+      labelSize = "ml-[0.44rem] text-[0.88rem]"
       break
-    default:
-      throw new TypeError(`${size} is undefined size prop.`)
+    case "lg":
+      containerSize = "p-[0.36rem]"
+      inputSize = "h-[1.2rem] w-[1.2rem]"
+      svgSize = "h-[0.96rem] w-[0.96rem] stroke-[0.24rem]"
+      labelSize = "ml-[0.48rem] text-[0.96rem]"
+      break
+    case "xl":
+      containerSize = "p-[0.42rem]"
+      inputSize = "h-[1.4rem] w-[1.4rem]"
+      svgSize = "h-[1.12rem] w-[1.12rem] stroke-[0.28rem]"
+      labelSize = "ml-[0.56rem] text-[1.12rem]"
+      break
   }
+  const inputRef = useRef<HTMLInputElement>(null)
+
+  const checkIcon = (
+    <svg
+      className={`${svgSize} peer-checked:block absolute hidden pointer-events-none stroke-white fill-none`}
+      viewBox="0 0 24 24"
+      xmlns="http://www.w3.org/2000/svg"
+    >
+      <path
+        d="M5 13l4 4L19 7"
+        strokeLinecap="round"
+        strokeLinejoin="round"
+      ></path>
+    </svg>
+  )
   return (
-    <div className="flex flex-row justify-start items-center px-1 py-0.5 hover:bg-slate-100 hover:dark:bg-neutral-700 rounded-md">
-      <input
-        className={`shrink-0 relative peer ${inputSize} border-[0.1rem] border-slate-400 appearance-none outline-none rounded-sm
+    <div
+      className={`${containerSize} flex flex-row justify-start items-center hover:bg-slate-100 hover:dark:bg-neutral-700 rounded-md cursor-pointer ${containerClass}`}
+      onClick={(e) => {
+        if (e.target === e.currentTarget) {
+          if (inputRef.current) inputRef.current.click()
+        }
+      }}
+    >
+      <div className="relative flex items-center justify-center">
+        <input
+          className={`peer shrink-0 ${inputSize} border-[0.1rem] border-slate-400 appearance-none outline-none rounded-sm cursor-pointer
         checked:bg-indigo-700 checked:border-indigo-700`}
-        type="checkbox"
-        checked={checked}
-        onChange={onChange}
-        name={name}
-        id={name}
-      />
+          type="checkbox"
+          checked={checked}
+          onChange={onChange}
+          name={name}
+          id={name}
+          ref={inputRef}
+        />
+        {checkIcon}
+      </div>
       <label
-        className={`grow ${labelSize} hover:cursor-pointer select-none`}
+        className={`grow ${labelSize} select-none cursor-pointer ${labelClass}`}
         htmlFor={name}
       >
         {label}
       </label>
-      <svg
-        xmlns="http://www.w3.org/2000/svg"
-        viewBox="0 0 24 24"
-        className={`absolute hidden peer-checked:block pointer-events-none ${svgSize} stroke-white stroke-2`}
-      >
-        <path
-          fillRule="evenodd"
-          d="M19.916 4.626a.75.75 0 01.208 1.04l-9 13.5a.75.75 0 01-1.154.114l-6-6a.75.75 0 011.06-1.06l5.353 5.353 8.493-12.739a.75.75 0 011.04-.208z"
-          clipRule="evenodd"
-        />
-      </svg>
     </div>
   )
 }
