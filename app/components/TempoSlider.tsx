@@ -37,6 +37,7 @@ export default function TempoSlider({
         className="w-full h-3 bg-indigo-400 dark:bg-indigo-500 rounded-full appearance-none cursor-pointer"
         onChange={handleChange}
         onMouseUp={handleMouseUp}
+        onTouchEnd={handleMouseUp}
       />
     </>
   )
