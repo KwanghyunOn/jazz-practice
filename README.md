@@ -19,6 +19,8 @@
 ### Bugs
 #### Diatonic chord practice
 - [ ] Enharmonic toggle shifts the content.
+### Misc
+- [ ] Integrate drawer from https://vaul.emilkowal.ski/.
 
 
 ## Getting Started

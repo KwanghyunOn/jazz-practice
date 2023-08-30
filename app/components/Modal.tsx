@@ -9,13 +9,24 @@ export default function Modal({
   children,
   placement = "center",
   className = "",
+  onClose = null,
 }: {
   children: React.ReactNode
   placement?: "bottom" | "center"
   className?: string
+  onClose?: React.MouseEventHandler | null
 }) {
-  const router = useRouter()
-  const clickedRef = useRef(false)
+  if (!onClose) {
+    const router = useRouter()
+    const clickedRef = useRef(false)
+    onClose = () => {
+      // disable onClick handler during exit animation
+      if (!clickedRef.current) {
+        clickedRef.current = true
+        router.back()
+      }
+    }
+  }
 
   let placementClass, dropIn
   switch (placement) {
@@ -49,17 +60,11 @@ export default function Modal({
   return (
     <div>
       <motion.div
-        className="absolute inset-0 backdrop-contrast-50"
+        className="fixed inset-0 backdrop-contrast-50"
         initial={{ opacity: 0 }}
         animate={{ opacity: 1 }}
         exit={{ opacity: 0 }}
-        onClick={() => {
-          // disable onClick handler during exit animation
-          if (!clickedRef.current) {
-            clickedRef.current = true
-            router.back()
-          }
-        }}
+        onClick={onClose}
       >
         <motion.div
           variants={dropIn}

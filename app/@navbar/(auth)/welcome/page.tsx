@@ -1,15 +1,14 @@
 import { Navbar } from "@/components/Navbar"
-
 import {
-  NavbarContentMenu,
+  NavbarContentBack,
   NavbarContentProfile,
 } from "@/components/NavbarContent"
 
-export default function PracticeNavbar() {
+export default function WelcomeNavbar() {
   return (
     <Navbar
       title="Jazz Practice"
-      contentLeft={<NavbarContentMenu href="#" />}
+      contentLeft={<NavbarContentBack href="/" />}
       contentRight={<NavbarContentProfile />}
     />
   )
