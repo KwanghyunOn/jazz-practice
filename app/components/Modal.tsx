@@ -3,7 +3,6 @@
 import { useRef } from "react"
 import { useRouter } from "next/navigation"
 import { motion } from "framer-motion"
-import { exhaustiveCheck } from "@/lib/utils"
 
 export default function Modal({
   children,
@@ -16,9 +15,9 @@ export default function Modal({
   className?: string
   onClose?: React.MouseEventHandler | null
 }) {
+  const router = useRouter()
+  const clickedRef = useRef(false)
   if (!onClose) {
-    const router = useRouter()
-    const clickedRef = useRef(false)
     onClose = () => {
       // disable onClick handler during exit animation
       if (!clickedRef.current) {
@@ -53,9 +52,6 @@ export default function Modal({
         exit: { x: "-50%", y: "-100%" },
       }
       break
-    default:
-      exhaustiveCheck(placement)
-      throw new TypeError(`Unhandled placement type: ${placement}`)
   }
   return (
     <div>
