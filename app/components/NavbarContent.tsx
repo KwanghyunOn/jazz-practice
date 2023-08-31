@@ -13,6 +13,24 @@ import { useUserContext } from "./UserContext"
 export function NavbarContentProfile() {
   const { user } = useUserContext()
   const [isLoginModalOpen, setIsLoginModalOpen] = useState(false)
+  const profileIcon = (
+    <svg
+      className="h-6 w-6 stroke-2 stroke-neutral-800 dark:stroke-neutral-100 fill-none"
+      viewBox="0 0 24 24"
+      xmlns="http://www.w3.org/2000/svg"
+    >
+      <path
+        d="M12 2C6.477 2 2 6.477 2 12s4.477 10 10 10 10-4.477 10-10S17.523 2 12 2z"
+        strokeLinecap="round"
+        strokeLinejoin="round"
+      ></path>
+      <path
+        d="M4.271 18.346S6.5 15.5 12 15.5s7.73 2.846 7.73 2.846M12 12a3 3 0 100-6 3 3 0 000 6z"
+        strokeLinecap="round"
+        strokeLinejoin="round"
+      ></path>
+    </svg>
+  )
   const logoutIcon = (
     <svg
       className="h-6 w-6 stroke-2 stroke-neutral-800 dark:stroke-neutral-100 fill-none"
@@ -32,26 +50,21 @@ export function NavbarContentProfile() {
         <div className="relative">
           <Dropdown>
             <DropdownTrigger>
-              <div className="relative h-8 w-8 rounded-full overflow-hidden">
-                <Image
-                  fill
-                  src="https://lh3.googleusercontent.com/a/AAcHTtcm2qto2bNaDqZMXpXUIcTqoRp_gwEsiz0T85M_ax0fp90=s96-c"
-                  // src={session.user?.image as string}
-                  alt="Profile picture"
-                  objectFit="cover"
-                />
-              </div>
+              <div className="mr-1">{profileIcon}</div>
             </DropdownTrigger>
             <DropdownContent>
               <div
-                className="absolute right-0 mt-2 p-1 rounded-md overflow-hidden
-            bg-neutral-50 dark:bg-neutral-700 dark:hover:bg-neutral-600 dark:text-neutral-200
+                className="absolute right-0 mt-2 rounded-md overflow-hidden flex flex-col
+            bg-neutral-50 dark:bg-neutral-700 dark:text-neutral-200
           "
               >
+                <div className="p-2 border-b-2 border-neutral-700 dark:border-neutral-500">
+                  {user.username}
+                </div>
                 <Signout>
-                  <div className="p-1 pl-2 gap-2 flex items-center">
+                  <div className="p-2 flex items-center hover:bg-neutral-200 dark:hover:bg-neutral-600">
                     <div className="whitespace-nowrap">Sign out</div>
-                    {logoutIcon}
+                    <div className="ml-2">{logoutIcon}</div>
                   </div>
                 </Signout>
               </div>

@@ -17,7 +17,9 @@ export function Dropdown({ children }: { children: React.ReactNode }) {
   const [isOpen, setIsOpen] = useState(false)
   return (
     <div className="relative">
-      <div onClick={() => setIsOpen(!isOpen)}>{trigger}</div>
+      <div onClick={() => setIsOpen(!isOpen)} className="cursor-pointer">
+        {trigger}
+      </div>
       {isOpen && (
         <div>
           <Backdrop onClick={() => setIsOpen(false)} />
